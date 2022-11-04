@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p welcome to teja's world 
+  a.btn(type="button", class="btn btn-warning",onclick='doBump()') Press Me
+
+  div#bump Bump the count 
+  br
+  a(class="btn btn-dark" href="Football") Football 
+  script.
+      var count=0;
+      var bump=1;
+      function doBump(){
+      count=count+bump;
+      bump=bump+1;
+      print.innerHTML='Count '+count+' with bump '+bump;}
+      print=document.getElementById("bump");
+      
