@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('Football', { title: 'Search results Football' });
-});
-
-module.exports = router;
+var express = require('express'); 
+const football_controlers= require('../controllers/football'); 
+var router = express.Router(); 
+ 
+/* GET footballs */ 
+router.get('/', football_controlers.football_view_all_Page ); 
+module.exports = router; 

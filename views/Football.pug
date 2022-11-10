@@ -3,11 +3,11 @@ extends layout
 block content
   h1= title
   -
-  - var result = [{"Football_name":"good_year","Football_size":250,"Football_type":"alltheseason"},{"Football_name":"CR7","Football_size":700,"Football_type":"smooth rubber"},{"Football_name":"nivia","Football_size":750,"Football_type":"tournmentball"}]
+  - var result = results
   div.container-fluid
      div.row
         each item,index in result
-            div.col-sm-2(onclick=`buy(${index})`) Football Name: #{item["Football_name"]}  <br>  Football_size: #{item["Football_size"]} <br> Football_type: #{item["Football_type"]} 
+            div.col-sm-2(onclick=`buy(${index})`) Football_Name: #{item["football_name"]}  <br>  Football_size: #{item["football_size"]} <br> Football_type: #{item["football_type"]} 
   script.
       function buy(index)
       {

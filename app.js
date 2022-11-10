@@ -3,13 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var football = require("./models/football");
+
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{useNewUrlParser: true,
+useUnifiedTopology: true});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var FootballRouter = require('./routes/Football');
+var FootballRouter = require('./routes/football');
 var gridbuildRouter = require('./routes/gridbuild');
-
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -28,7 +37,7 @@ app.use('/users', usersRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/Football', FootballRouter);
 app.use('/selector', selectorRouter);
-
+app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -44,5 +53,34 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+async function recreateDB(){
+ // Delete everything
+ await football.deleteMany();
+ let instance1 = new
+football({football_type:"leather", football_name:'Cosco',
+football_size:25});
+ instance1.save( function(err,doc) {
+ if(err) return console.error(err);
+ console.log("First object saved")
+ });
+
+ let instance2 = new
+football({football_type:"rubber", football_name:'nivia',
+football_size:26});
+ instance2.save( function(err,doc) {
+ if(err) return console.error(err);
+ console.log("second object saved")
+ });
+ let instance3= new
+football({football_type:"sythetic", football_name:'puma',
+football_size:27});
+ instance3.save( function(err,doc) {
+ if(err) return console.error(err);
+ console.log("third object saved")
+ });
+}
+let reseed = true;
+if (reseed) { recreateDB();}
 
 module.exports = app;
