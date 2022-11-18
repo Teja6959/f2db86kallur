@@ -1,0 +1,46 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else
+   - let footballid = toShow._id 
+   - let football_name = toShow.football_name
+   - let football_type = toShow.football_type 
+   - let football_size = toShow.football_size
+   
+   div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{footballid} 
+   - let actionid = "/resource/footballs/" + footballid 
+   form(id='msform', action= actionid, method="PUT") 
+    div.form-group 
+        label.footballAttr(for='football_name') football Name 
+        input#football_name(type='text', name='football_name', value= football_name ) 
+    div.form-group 
+        label.footballAttr(for='size') football type 
+        input#football_type(type='text', name='size', value= football_type ) 
+    div.form-group 
+        label.footballAttr(for='football_size') football Size 
+        input#football_size(type='number', name='cost', value= football_size ) 
+    input(type="submit") 
+ 
+   script. 
+    document.forms['footballForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 

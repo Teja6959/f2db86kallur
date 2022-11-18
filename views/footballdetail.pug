@@ -1,0 +1,25 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else
+   - let footballid = toShow._id 
+   - let football_name = toShow.football_name 
+   - let football_type = toShow.football_type 
+   - let football_size = toShow.football_size 
+   div 
+    div.row 
+      div(class='footballAttr mr-3') football ID is: 
+      div #{footballid} 
+    div.row 
+      div(class='footballAttr mr-3') football Type is: 
+      div #{football_name} 
+    div.row 
+      div(class='footballAttr mr-3') football Type is: 
+      div #{football_type} 
+    div.row 
+      div(class='footballAttr mr-3') football size is: 
+      div #{football_size} 

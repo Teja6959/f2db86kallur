@@ -28,3 +28,7 @@ router.get('/footballs/:id', football_controller.football_detail);
 router.get('/footballs', football_controller.football_list); 
  
 module.exports = router; 
+
+
+
+

@@ -7,9 +7,15 @@ block content
   div.container-fluid
      div.row
         each item,index in result
+            -let destination = `dispatch(\"/football/update?id=${item._id}\")` 
             div.col-sm-2(onclick=`buy(${index})`) Football_Name: #{item["football_name"]}  <br>  Football_size: #{item["football_size"]} <br> Football_type: #{item["football_type"]} 
+            button.btn( class="btn-primary ml-1", onclick= destination) Update 
   script.
+      
       function buy(index)
       {
          alert("you purchased item "+(index+1))
       }
+      function dispatch(path){ 
+      window.location.href=path 
+      } 

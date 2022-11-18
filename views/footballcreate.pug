@@ -1,0 +1,35 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='footballForm', action="/resource/footballs", method="POST") 
+    div.form-group 
+        label.footballAttr(for='football_name') football Name 
+        input#football_name(type='text', name='football_name') 
+    div.form-group 
+        label.footballAttr(for='football_type') football Type 
+        input#football_type(type='text', name='football_type') 
+    div.form-group 
+        label.footballAttr(for='football_size') football Size 
+        input#football_size(type='number', name='football_size') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['footballForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 
+ 
