@@ -18,13 +18,13 @@ block content
    form(id='msform', action= actionid, method="PUT") 
     div.form-group 
         label.footballAttr(for='football_name') football Name 
-        input#football_name(type='text', name='football_name', value= football_name ) 
+        input#football_name(type='text', name='football_name', value= football_name,required ) 
     div.form-group 
         label.footballAttr(for='size') football type 
-        input#football_type(type='text', name='size', value= football_type ) 
+        input#football_type(type='text', name='size', value= football_type,required ) 
     div.form-group 
         label.footballAttr(for='football_size') football Size 
-        input#football_size(type='number', name='cost', value= football_size ) 
+        input#football_size(type='number', name='cost', value= football_size,min="20",max="50" ) 
     input(type="submit") 
  
    script. 

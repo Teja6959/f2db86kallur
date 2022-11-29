@@ -2,6 +2,15 @@ var express = require('express');
 const football_controlers= require('../controllers/football'); 
 var football = require('../models/football'); 
 var router = express.Router(); 
+// A little function to check if we have an authorized user and continue on 
+// redirect to login. 
+const secured = (req, res, next) => { 
+    if (req.user){ 
+      return next(); 
+    } 
+    req.session.returnTo = req.originalUrl; 
+    res.redirect("/login"); 
+  } 
  
 /* GET footballs */ 
 router.get('/', football_controlers.football_view_all_Page ); 
@@ -24,7 +33,7 @@ router.get('/delete', async function(req, res) {
     } 
 }); 
 /* GET create update page */ 
-router.get('/update', football_controlers.football_update_Page);
+router.get('/update', secured,football_controlers.football_update_Page);
  
 
  

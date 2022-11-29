@@ -1,15 +1,22 @@
 extends layout
 
 block content
+  
+  -let destination4 = `dispatch(\"/football/create")` 
+  button.btn( class="btn-success ml-1", onclick= destination4) Delete 
   h1= title
   -
   - var result = results
   div.container-fluid
      div.row
         each item,index in result
-            -let destination = `dispatch(\"/football/update?id=${item._id}\")` 
+            -let destination = `dispatch(\"/football/update?id=${item._id}\")`
+            -let destination2 = `dispatch(\"/football/delete?id=${item._id}\")`
+            -let destination1 = `dispatch(\"/football/detail?id=${item._id}\")` 
             div.col-sm-2(onclick=`buy(${index})`) Football_Name: #{item["football_name"]}  <br>  Football_size: #{item["football_size"]} <br> Football_type: #{item["football_type"]} 
             button.btn( class="btn-primary ml-1", onclick= destination) Update 
+            button.btn( class="btn-secondary ml-1", onclick= destination1) Detail 
+            button.btn( class="btn-danger ml-1", onclick= destination2) Delete 
   script.
       
       function buy(index)
