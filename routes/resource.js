@@ -27,8 +27,4 @@ router.get('/footballs/:id', football_controller.football_detail);
 // GET request for list of all football items. 
 router.get('/footballs', football_controller.football_list); 
  
-module.exports = router; 
-
-
-
-
+module.exports = router;

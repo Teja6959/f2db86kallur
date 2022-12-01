@@ -14,14 +14,19 @@ const secured = (req, res, next) => {
  
 /* GET footballs */ 
 router.get('/', football_controlers.football_view_all_Page ); 
+module.exports = router; 
+
 router.get('/garrettCars/:id', football_controlers.football_detail);
-
-
 router.put('/garrettCars/:id', football_controlers.football_update_put);
+
+
 router.get('/detail', football_controlers.football_view_one_Page); 
+
+
 /* GET create football page */ 
-router.get('/create', football_controlers.football_create_Page); 
-router.get('/delete', async function(req, res) { 
+router.get('/create', secured,football_controlers.football_create_Page); 
+
+router.get('/delete', secured,async function(req, res) { 
     console.log("Delete view for id "  + req.query.id) 
     try{ 
         result = await football.findById(req.query.id) 
@@ -32,9 +37,11 @@ router.get('/delete', async function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }); 
+
+//router.get('/delete', secured, football_controlers.football_delete_Page);
+
 /* GET create update page */ 
 router.get('/update', secured,football_controlers.football_update_Page);
  
 
  
-module.exports = router; 
